@@ -14,30 +14,12 @@ The service accepts structured applicant payloads over standard HTTP methods, ap
 
 ## 🔄 End-to-End MLOps Workflow
 
-```text
-┌─────────────────────────────────┐
-│   💻 Local Development (VS Code) │
-└─────────────────────────────────┘
-                │
-                ▼
-┌─────────────────────────────────┐
-│     🧪 Unit Testing (pytest)     │
-└─────────────────────────────────┘
-                │
-                ▼
-┌─────────────────────────────────┐
-│ ⚙️ CI/CD Pipeline (GitHub Actions)│
-└─────────────────────────────────┘
-                │
-                ▼
-┌─────────────────────────────────┐
-│  🐳 Containerization (Docker)   │
-└─────────────────────────────────┘
-                │
-                ▼
-┌─────────────────────────────────┐
-│  📦 Image Registry (Docker Hub) │
-└─────────────────────────────────┘
+```mermaid
+flowchart TD
+    A["💻 Local Development<br/>(VS Code)"] --> B["🧪 Unit Testing<br/>(pytest)"]
+    B --> C["⚙️ CI/CD Pipeline<br/>(GitHub Actions)"]
+    C --> D["🐳 Containerization<br/>(Docker Build)"]
+    D --> E["📦 Image Registry<br/>(Docker Hub)"]
 ```
 
 ---
