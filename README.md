@@ -69,4 +69,19 @@ loan-approval-api/
 ├── test_app.py                   # Automated endpoint unit tests (PyTest)
 └── README.md                     # Documentation
 
- Access the ApplicationInteractive UI: Open your browser and navigate to:http://localhost:5000/Direct Prediction Endpoint:http://localhost:5000/prediction📝 Input Features & GuidelinesFeatureDescriptionAccepted Values / FormatGenderApplicant genderMale, FemaleMarriedApplicant marital statusMarried, UnmarriedCredit_HistoryPrior credit standingClear Debts, Unclear DebtsApplicantIncomeGross applicant incomeNumerical (e.g., 5000 or 10000)LoanAmountRequested loan amount (in thousands)Numerical (e.g., 100 = $100,000)⚠️ Important Note on Loan Amount:The model expects LoanAmount expressed in thousands.For example:Enter 100 to represent $100,000 / ₹100,000Enter 50 to represent $50,000 / ₹50,000(Entering 100000 directly will be interpreted by the model as 100 million, leading to high rejection rates).
+## 📝 Input Features & Guidelines
+
+| Feature | Description | Accepted Values / Format |
+| :--- | :--- | :--- |
+| **Gender** | Applicant gender | `Male`, `Female` |
+| **Married** | Applicant marital status | `Married`, `Unmarried` |
+| **Credit_History** | Prior credit standing | `Clear Debts`, `Unclear Debts` |
+| **ApplicantIncome** | Gross applicant income | Numerical (e.g., `5000` or `10000`) |
+| **LoanAmount** | Requested loan amount (**in thousands**) | Numerical (e.g., `100` = $100,000) |
+
+> ⚠️ **Important Note on Loan Amount:**  
+> The model expects `LoanAmount` expressed **in thousands**.  
+> *For example:*  
+> * Enter **`100`** to represent **$100,000 / ₹100,000**  
+> * Enter **`50`** to represent **$50,000 / ₹50,000**  
+> *(Entering `100000` directly will be interpreted by the model as 100 million, leading to high rejection rates).*
