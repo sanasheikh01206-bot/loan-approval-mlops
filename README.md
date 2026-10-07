@@ -93,7 +93,7 @@ loan-approval-api/
 > * Enter **`50`** to represent **$50,000 / ₹50,000**  
 > *(Entering `100000` directly will be interpreted by the model as 100 million, leading to high rejection rates).*
 
-### 2. Programmatic POST Request (JSON Payload)
+### **Programmatic POST Request (JSON Payload)**
 
 **Endpoint:** `POST http://localhost:5000/prediction`  
 **Headers:** `Content-Type: application/json`
