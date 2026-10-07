@@ -63,19 +63,13 @@ loan-approval-api/
 │   └── workflows/
 │       └── automate.yml             # Automated CI/CD test and deployment pipeline
 │
-├── model/
-│   ├── loan_model.pkl            # Serialized Scikit-Learn model artifact
-│   └── notebooks/
-│       └── model_training.ipynb  # Colab training, EDA, and validation notebook
-│
-├── static/                       # Optional assets
 ├── templates/
 │   └── index.html                # Basic API test interface
 │
 ├── app.py                        # Core Flask API entrypoint and route handlers
 ├── Dockerfile                    # Container configuration file
-├── requirements.txt              # Production Python dependencies
-├── Procfile                      # Render process file
+|── classifier.pkl                # pickle file ( from trained model)
+├── requirements.txt              # Production Python dependencies                   
 ├── test_app.py                   # Automated endpoint unit tests (PyTest)
 └── README.md                     # Documentation
 
