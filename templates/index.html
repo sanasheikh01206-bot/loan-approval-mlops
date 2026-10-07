@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan Eligibility Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #eef2f7; display: flex; justify-content: center; padding: 40px; }
+        form { background: white; padding: 25px; border-radius: 8px; width: 350px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        label { display: block; margin-top: 12px; font-weight: bold; font-size: 14px; }
+        input, select { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; margin-top: 20px; padding: 10px; background: #28a745; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+        button:hover { background: #218838; }
+    </style>
+</head>
+<body>
+    <form action="/prediction" method="GET">
+        <h2>Loan Application</h2>
+
+        <label for="Gender">Gender</label>
+        <select name="Gender" id="Gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <label for="Married">Marital Status</label>
+        <select name="Married" id="Married">
+            <option value="Unmarried">Unmarried</option>
+            <option value="Married">Married</option>
+        </select>
+
+        <label for="Credit_History">Credit History</label>
+        <select name="Credit_History" id="Credit_History">
+            <option value="Clear Debts">Clear Debts</option>
+            <option value="Unclear Debts">Unclear Debts</option>
+        </select>
+
+        <label for="ApplicantIncome">Applicant Income</label>
+        <input type="number" name="ApplicantIncome" id="ApplicantIncome" value="50000" required>
+
+        <label for="LoanAmount">Loan Amount</label>
+        <input type="number" name="LoanAmount" id="LoanAmount" value="150000" required>
+
+        <button type="submit">Check Eligibility</button>
+    </form>
+</body>
+</html>
