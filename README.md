@@ -1,4 +1,3 @@
-```markdown
 # 🏦 End-to-End Loan Approval Prediction Service (MLOps)
 
 An end-to-end Machine Learning web application and API that predicts loan application approval status based on applicant demographics, financial profile, and credit history.
@@ -22,8 +21,6 @@ You can pull and run the pre-built container directly on your machine using Dock
 ### 1. Pull the Image from Docker Hub
 ```bash
 docker pull sana01206/loan-approval-mlops:latest
-
-```
 
 ### 2. Run the Container
 
