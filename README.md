@@ -1,27 +1,70 @@
-# 🏦 End-to-End Loan Approval Prediction Service (MLOps)
+# End-to-End Loan Approval Prediction API
 
-An end-to-end Machine Learning web application and API that predicts loan application approval status based on applicant demographics, financial profile, and credit history.
-
-Containerized with Docker, continuously tested and built via GitHub Actions CI/CD, and published to Docker Hub.
+An automated end-to-end Machine Learning web service built to assess and predict loan eligibility based on applicant financial and demographic profiles. The application packages a Scikit-Learn classification pipeline into a production-ready Flask RESTful API, fully containerized and configured for automated continuous deployment to Render.
 
 ---
 
 ## 📌 Project Overview
 
-* **Objective:** Automate loan eligibility screening with real-time model inference.
-* **Architecture:** Flask web server exposing both an interactive HTML form UI and programmatic JSON API endpoints.
-* **Testing & CI/CD:** Automated test suite via `pytest` integrated into GitHub Actions, triggering automated Docker image builds and pushes to Docker Hub upon updates to the `main` branch.
+Manual loan approval workflows can be slow, resource-intensive, and prone to inconsistent risk evaluation. This project automates the risk screening process by exposing a lightweight, robust inference API powered by a pre-trained machine learning model.
+
+The service accepts structured applicant payloads over standard HTTP methods, applies all necessary transformations dynamically, and outputs instant classification results (`Approved` vs. `Rejected`) alongside inference diagnostics and API health telemetry.
 
 ---
 
-## ⚡ Quickstart: Run with Docker (No Local Python Setup Needed)
+## 🔬 Model Training & Workflow
 
-You can pull and run the pre-built container directly on your machine using Docker:
+The model development workflow was designed and verified through an iterative training notebook before being packaged for serving:
 
-### 1. Pull the Image from Docker Hub
-```bash
-docker pull sana01206/loan-approval-mlops:latest
+1. **Exploratory Data Analysis (EDA):**
+   - Investigated feature distributions across key applicant criteria including income levels, loan term durations, and credit records.
+   - Identified and handled missing values across both categorical (e.g., Dependents, Self-Employed status) and numerical fields (e.g., Loan Amount, Credit History).
 
-### 2. Run the container
-```bash
-docker run -d -p 5000:5000 --name loan-app sana01206/loan-approval-mlops:latest
+2. **Feature Engineering & Preprocessing:**
+   - **Numerical Transformations:** Addressed skewness in financial parameters (such as `ApplicantIncome`, `CoapplicantIncome`, and `LoanAmount`) using normalization/scaling techniques to balance variance. Note that `LoanAmount` is normalized to thousands to match standard industry reporting conventions.
+   - **Categorical Encoding:** Encoded demographic and qualification attributes (Gender, Married, Education, Property Area) using consistent one-hot and binary encoding schemes.
+   - **Critical Predictors:** Feature importance analysis established `Credit_History` as the most influential signal determining approval probability, paired closely with debt-to-income indicators.
+
+3. **Model Selection & Evaluation:**
+   - Evaluated multiple classification architectures (including Logistic Regression, Decision Trees, and Random Forest Classifiers) using cross-validation.
+   - Tuned hyperparameters to balance precision and recall, optimizing specifically to prevent false approvals (minimizing default risk).
+   - Exported the fitted estimator and preprocessing pipeline using `pickle` / `joblib` artifacts to ensure reproducible inference inside the production backend.
+
+---
+
+## 🛠️ Tech Stack & Tools
+
+- **Language:** Python 3.10+
+- **Machine Learning & Data Processing:** Scikit-Learn, Pandas, NumPy
+- **API Framework:** Flask, Werkzeug
+- **Environment & Experimentation:** Google Colab, Jupyter Notebook
+- **Containerization:** Docker
+- **Testing & Quality Assurance:** PyTest
+- **Deployment Platform:** Render
+
+---
+
+## 📂 Project Directory Structure
+
+```text
+loan-approval-api/
+│
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml             # Automated CI/CD test and deployment pipeline
+│
+├── model/
+│   ├── loan_model.pkl            # Serialized Scikit-Learn model artifact
+│   └── notebooks/
+│       └── model_training.ipynb  # Colab training, EDA, and validation notebook
+│
+├── static/                       # Optional assets
+├── templates/
+│   └── index.html                # Basic API test interface
+│
+├── app.py                        # Core Flask API entrypoint and route handlers
+├── Dockerfile                    # Container configuration file
+├── requirements.txt              # Production Python dependencies
+├── Procfile                      # Render process file
+├── test_app.py                   # Automated endpoint unit tests (PyTest)
+└── README.md                     # Documentation
