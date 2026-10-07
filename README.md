@@ -18,8 +18,6 @@ Containerized with Docker, continuously tested and built via GitHub Actions CI/C
 
 You can pull and run the pre-built container directly on your machine using Docker:
 
-### 1. Pull the Image from Docker Hub
-```bash
 docker pull sana01206/loan-approval-mlops:latest
 
 ### 2. Run the Container
@@ -27,7 +25,6 @@ docker pull sana01206/loan-approval-mlops:latest
 ```bash
 docker run -d -p 5000:5000 --name loan-app sana01206/loan-approval-mlops:latest
 
-```
 
 ### 3. Access the Application
 
