@@ -51,7 +51,7 @@ loan-approval-api/
 │
 ├── .github/
 │   └── workflows/
-│       └── ci-cd.yml             # Automated CI/CD test and deployment pipeline
+│       └── automate.yml             # Automated CI/CD test and deployment pipeline
 │
 ├── model/
 │   ├── loan_model.pkl            # Serialized Scikit-Learn model artifact
