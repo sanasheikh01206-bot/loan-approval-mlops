@@ -31,6 +31,16 @@ The model development workflow was designed and verified through an iterative tr
    - Exported the fitted estimator and preprocessing pipeline using `pickle` / `joblib` artifacts to ensure reproducible inference inside the production backend.
 
 ---
+## 🧠 Model Background
+
+The inference engine uses a binary Logistic Regression model trained to predict loan eligibility[cite: 21]. Categorical features (`Gender`, `Married`) were numerically encoded, missing records were removed, and the model was fitted using five core indicators: applicant income, requested loan amount, credit history, marital status, and gender[cite: 19, 20, 21]. 
+
+* **Validation Accuracy:** ~81.25%[cite: 22]
+* **Training Accuracy:** ~80.47%[cite: 22]
+
+The trained estimator was serialized into `classifier.pkl` to serve low-latency predictions directly within the Flask microservice[cite: 22].
+
+---
 
 ## 🛠️ Tech Stack & Tools
 
