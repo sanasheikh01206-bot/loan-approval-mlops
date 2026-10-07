@@ -123,7 +123,8 @@ No setup or installation required. Test the API directly in your browser or thro
 Run the fully packaged application locally without needing Python or dependency setup:
 
 ```bash
-docker run -p 5000:5000 your-dockerhub-username/loan-approval-api:latest
+docker pull sana01206/loan-approval-mlops:latest
+docker run -d -p 5000:5000 --name loan-app sana01206/loan-approval-mlops:latest
 ```
 
 *(Docker will automatically pull the image if it is not found locally).*
