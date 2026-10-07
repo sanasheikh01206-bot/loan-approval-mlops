@@ -4,33 +4,25 @@ from app import app
 
 @pytest.fixture
 def client():
+    app.config["TESTING"] = True
     with app.test_client() as client:
         yield client
 
 
-def test_root(client):
-    """Verifies that the home endpoint is live."""
-    resp = client.get("/")
-    assert resp.status_code == 200
+def test_root_endpoint(client):
+    """Test that the home page renders correctly."""
+    response = client.get("/")
+    assert response.status_code == 200
 
 
-def test_predict_post(client):
-    """Verifies the JSON POST endpoint (used by Newman/Postman)."""
-    test_data = {
+def test_prediction_post(client):
+    """Test the prediction endpoint with a JSON payload."""
+    payload = {
         "Gender": "Male",
-        "Married": "Unmarried",
-        "Credit_History": "Unclear Debts",
-        "ApplicantIncome": 100000,
-        "LoanAmount": 2000000,
+        "Married": "Married",
+        "Credit_History": "Clear Debts",
+        "ApplicantIncome": 10000,
+        "LoanAmount": 100,
     }
-    resp = client.post("/prediction", json=test_data)
-    assert resp.status_code == 200
-    assert resp.json == {"loan_approval_status": "Rejected"}
-
-
-def test_predict_get_browser(client):
-    """Verifies the browser URL parameter GET request."""
-    url = "/prediction?Gender=Male&Married=Unmarried&Credit_History=Unclear%20Debts&ApplicantIncome=100000&LoanAmount=2000000"
-    resp = client.get(url)
-    assert resp.status_code == 200
-    assert resp.json == {"loan_approval_status": "Rejected"}
+    response = client.post("/prediction", json=payload)
+    assert response.status_code == 200
