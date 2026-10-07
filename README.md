@@ -108,7 +108,27 @@ loan-approval-api/
   "LoanAmount": 100
 }
 ```
+## 🚀 Quick Start: Try Out the Application
 
+Choose whichever method fits your setup:
+
+### Option 1: Live Web Application (Render)
+No setup or installation required. Test the API directly in your browser or through tools like Postman:
+
+* **Live URL:** `https://your-loan-app.onrender.com` *(Update with your live Render URL)*
+
+---
+
+### Option 2: Run via Docker Hub (Single Command)
+Run the fully packaged application locally without needing Python or dependency setup:
+
+```bash
+docker run -p 5000:5000 your-dockerhub-username/loan-approval-api:latest
+```
+
+*(Docker will automatically pull the image if it is not found locally).*
+
+Once running, the service is accessible at `http://localhost:5000/`.
 **Response:**
 ```json
 {
