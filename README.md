@@ -21,3 +21,7 @@ You can pull and run the pre-built container directly on your machine using Dock
 ### 1. Pull the Image from Docker Hub
 ```bash
 docker pull sana01206/loan-approval-mlops:latest
+
+### 2. Run the container
+```bash
+docker run -d -p 5000:5000 --name loan-app sana01206/loan-approval-mlops:latest
