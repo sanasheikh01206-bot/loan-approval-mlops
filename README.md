@@ -12,6 +12,24 @@ The service accepts structured applicant payloads over standard HTTP methods, ap
 
 ---
 
+## 🔄 End-to-End MLOps Workflow
+
+```mermaid
+graph TD
+    A[💻 Local Development - VS Code]
+    B[🧪 Unit Testing - pytest]
+    C[⚙️ CI/CD Pipeline - GitHub Actions]
+    D[🐳 Containerization - Docker]
+    E[📦 Image Registry - Docker Hub]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+```
+
+---
+
 ## 🔬 Model Training & Workflow
 
 The model development workflow was designed and verified through an iterative training notebook before being packaged for serving:
