@@ -69,6 +69,10 @@ loan-approval-api/
 ├── test_app.py                   # Automated endpoint unit tests (PyTest)
 └── README.md                     # Documentation
 
+```
+
+---
+
 ## 📝 **Input Features & Guidelines**
 
 | Feature | Description | Accepted Values / Format |
@@ -82,6 +86,9 @@ loan-approval-api/
 > ⚠️ **Important Note on Loan Amount:**  
 > The model expects `LoanAmount` expressed **in thousands**.  
 > *For example:*  
+> * Enter **`100`** to represent **$100,000 / ₹100,000**  
+> * Enter **`50`** to represent **$50,000 / ₹50,000**  
+> *(Entering `100000` directly will be interpreted by the model as 100 million, leading to high rejection rates).*
 > * Enter **`100`** to represent **$100,000 / ₹100,000**  
 > * Enter **`50`** to represent **$50,000 / ₹50,000**  
 > *(Entering `100000` directly will be interpreted by the model as 100 million, leading to high rejection rates).*
