@@ -115,7 +115,7 @@ Choose whichever method fits your setup:
 ### Option 1: Live Web Application (Render)
 No setup or installation required. Test the API directly in your browser or through tools like Postman:
 
-* **Live URL:** `https://your-loan-app.onrender.com` *(Update with your live Render URL)*
+* **Live URL:** `https://loan-approval-mlops.onrender.com/`
 
 ---
 
