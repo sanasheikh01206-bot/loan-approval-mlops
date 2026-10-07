@@ -69,7 +69,7 @@ loan-approval-api/
 ├── test_app.py                   # Automated endpoint unit tests (PyTest)
 └── README.md                     # Documentation
 
-## 📝 Input Features & Guidelines
+## 📝 **Input Features & Guidelines**
 
 | Feature | Description | Accepted Values / Format |
 | :--- | :--- | :--- |
