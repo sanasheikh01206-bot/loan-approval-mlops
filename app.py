@@ -17,13 +17,13 @@ def root():
     
 
 
-@app.route("/prediction", methods=["POST"])
+@app.route("/prediction", methods=["GET", "POST"])
 def prediction():
     """Predict loan status via browser query params (GET) or JSON body (POST)."""
     if request.method == "GET":
         data = request.args
     else:
-        data = request.get_json(force=True)
+        data = request.get_json(force=True) or request.form
 
     gender = 0 if data.get("Gender") == "Male" else 1
     married = 0 if data.get("Married") == "Unmarried" else 1
@@ -34,8 +34,7 @@ def prediction():
     result = clf.predict([[gender, married, income, loan, credit]])
     pred = "Rejected" if result[0] == 0 else "Approved"
 
-    return jsonify({"result": "Approved"})
-
+    return jsonify({"result": pred})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
