@@ -1,46 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Loan Eligibility Checker</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #eef2f7; display: flex; justify-content: center; padding: 40px; }
-        form { background: white; padding: 25px; border-radius: 8px; width: 350px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        label { display: block; margin-top: 12px; font-weight: bold; font-size: 14px; }
-        input, select { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
-        button { width: 100%; margin-top: 20px; padding: 10px; background: #28a745; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
-        button:hover { background: #218838; }
-    </style>
+  <meta charset="UTF-8">
+  <title>Loan Eligibility Checker</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #eef2f7; display: flex; justify-content: center; padding: 40px; }
+    form { background: white; padding: 25px; border-radius: 8px; width: 350px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 12px; font-weight: bold; font-size: 14px; }
+    input, select { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+    button { width: 100%; margin-top: 20px; padding: 10px; background: #28a745; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+    button:hover { background: #218838; }
+    
+    /* Style for the result text box */
+    #resultBox {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+      display: none; /* Hidden until button is clicked */
+    }
+  </style>
 </head>
 <body>
-    <form action="/prediction" method="GET">
-        <h2>Loan Application</h2>
+  <!-- Added id="loanForm" -->
+  <form id="loanForm" action="/prediction" method="GET">
+    <h2>Loan Application</h2>
 
-        <label for="Gender">Gender</label>
-        <select name="Gender" id="Gender">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select>
+    <label for="Gender">Gender</label>
+    <select name="Gender" id="Gender">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
 
-        <label for="Married">Marital Status</label>
-        <select name="Married" id="Married">
-            <option value="Unmarried">Unmarried</option>
-            <option value="Married">Married</option>
-        </select>
+    <label for="Married">Marital Status</label>
+    <select name="Married" id="Married">
+      <option value="Unmarried">Unmarried</option>
+      <option value="Married">Married</option>
+    </select>
 
-        <label for="Credit_History">Credit History</label>
-        <select name="Credit_History" id="Credit_History">
-            <option value="Clear Debts">Clear Debts</option>
-            <option value="Unclear Debts">Unclear Debts</option>
-        </select>
+    <label for="Credit_History">Credit History</label>
+    <select name="Credit_History" id="Credit_History">
+      <option value="Clear Debts">Clear Debts</option>
+      <option value="Unclear Debts">Unclear Debts</option>
+    </select>
 
-        <label for="ApplicantIncome">Applicant Income</label>
-        <input type="number" name="ApplicantIncome" id="ApplicantIncome" value="50000" required>
+    <label for="ApplicantIncome">Applicant Income</label>
+    <input type="number" name="ApplicantIncome" id="ApplicantIncome" value="50000" required>
 
-        <label for="LoanAmount">Loan Amount</label>
-        <input type="number" name="LoanAmount" id="LoanAmount" value="150000" required>
+    <label for="LoanAmount">Loan Amount</label>
+    <input type="number" name="LoanAmount" id="LoanAmount" value="150000" required>
 
-        <button type="submit">Check Eligibility</button>
-    </form>
+    <button type="submit">Check Eligibility</button>
+
+    <!-- 1. The result will appear here right under the button inside your card -->
+    <div id="resultBox"></div>
+  </form>
+
+  <!-- 2. The script that sends data and displays the result without refreshing -->
+  <script>
+    const form = document.getElementById('loanForm');
+    const resultBox = document.getElementById('resultBox');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault(); // Stops the browser from leaving or reloading the page
+
+      resultBox.style.display = 'block';
+      resultBox.style.background = '#e2e3e5';
+      resultBox.style.color = '#383d41';
+      resultBox.textContent = 'Checking eligibility...';
+
+      // Collect form values as URL parameters (since form method is GET)
+      const params = new URLSearchParams(new FormData(form)).toString();
+
+      try {
+        const response = await fetch(`/prediction?${params}`);
+        const data = await response.json();
+
+        // data.result should come from your Flask backend (e.g., {"result": "Approved"})
+        const status = data.result || data.prediction || data;
+
+        resultBox.textContent = `Status: ${status}`;
+
+        if (String(status).toLowerCase().includes('approved') || String(status).toLowerCase().includes('eligible')) {
+          resultBox.style.background = '#d4edda';
+          resultBox.style.color = '#155724';
+        } else {
+          resultBox.style.background = '#f8d7da';
+          resultBox.style.color = '#721c24';
+        }
+      } catch (err) {
+        resultBox.style.background = '#f8d7da';
+        resultBox.style.color = '#721c24';
+        resultBox.textContent = 'Error checking eligibility. Please try again.';
+      }
+    });
+  </script>
 </body>
 </html>

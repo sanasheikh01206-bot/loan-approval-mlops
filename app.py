@@ -17,7 +17,7 @@ def root():
     
 
 
-@app.route("/prediction", methods=["GET", "POST"])
+@app.route("/prediction", methods=["POST"])
 def prediction():
     """Predict loan status via browser query params (GET) or JSON body (POST)."""
     if request.method == "GET":
@@ -34,7 +34,7 @@ def prediction():
     result = clf.predict([[gender, married, income, loan, credit]])
     pred = "Rejected" if result[0] == 0 else "Approved"
 
-    return jsonify({"loan_approval_status": pred})
+    return jsonify({"result": "Approved"})
 
 
 if __name__ == "__main__":
